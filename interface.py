@@ -43,7 +43,7 @@ if route =="Prédire":
             "niveau_etude": niveau_etude,
             "region": region,
             "smoker": smoker,
-            "nationalité_francaise": nationalite,
+            "nationalite_francaise": nationalite,
             "revenu_estime_mois": revenu
         }
 

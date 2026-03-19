@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 import joblib
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from loguru import logger
 from joblib import load
 from os.path import join
@@ -22,6 +22,30 @@ class FormulairePret(BaseModel):
     region: str
     smoker: str
     nationalité_francaise: str
+
+    @field_validator('sexe')
+    def sexe_valide(cls, v):
+        if v not in ['H', 'F']:
+            raise ValueError("sexe doit être 'H' ou 'F'")
+        return v
+
+    @field_validator('sport_licence')
+    def sport_valide(cls, v):
+        if v.lower() not in ['oui', 'non']:
+            raise ValueError("sport_licence doit être 'oui' ou 'non'")
+        return v.lower()
+
+    @field_validator('smoker')
+    def smoker_valide(cls, v):
+        if v.lower() not in ['oui', 'non']:
+            raise ValueError("smoker doit être 'oui' ou 'non'")
+        return v.lower()
+
+    @field_validator('nationalité_francaise')
+    def nat_valide(cls, v):
+        if v.lower() not in ['oui', 'non']:
+            raise ValueError("nationalite_francaise doit être 'oui' ou 'non'")
+        return v.lower()
     
 logger.add("logs/predire_pret.log", rotation="500 MB", level="INFO")
 try:

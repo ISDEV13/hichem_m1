@@ -31,7 +31,7 @@ def test_prediction_success(client):
         "niveau_etude": "bac+3",
         "region": "Ile-de-France",
         "smoker": "non",
-        "nationalite_francaise": "oui"
+        "nationalité_francaise": "oui"
     }
 
     response = client.post("/predire_pret/", json=payload)
